@@ -1,0 +1,8 @@
+AWK常用命令
+
+awk -F ':' 'BEGIN {print "开始循环"} {print $1"\t"$2} END{print "循环结束"}'
+
+ awk -F'<' '{if (NF>5) print $0 }'
+
+#杀掉某用户的所有进程
+ps -ef| grep guest |awk '{print $2}'|xargs kill -9
