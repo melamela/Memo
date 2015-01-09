@@ -9,6 +9,7 @@ Sender::Sender(){
 	m_mode = 1;
 	done_num = 0;
 	fail_num = 0;
+	total_time_ms = 0;
 }
 Sender::~Sender(){
 	if (m_processer)
@@ -101,6 +102,7 @@ int Sender::svc()
 		
 		//最后删除worker
 		done_num++;
+		total_time_ms += worker->cost_deal/1000;
 		if (worker->status==2)
 			fail_num++;
 		delete worker;

@@ -84,7 +84,8 @@ int main(int argc, char* argv[])
 		int display_interval = config.getInt("DISPLAY_INTERVAL");
 		int cnt = 0;
 		struct timeval tv_start,tv_end;
-		unsigned int total_time,done_num,fail_num;
+		unsigned int total_time,done_num,fail_num,total_deal_time;
+		unsigned int total_time_ms;
 		gettimeofday(&tv_start, NULL);
 
 		while(1){
@@ -96,9 +97,16 @@ int main(int argc, char* argv[])
 				gettimeofday(&tv_end, NULL);
 				total_time = (tv_end.tv_sec-tv_start.tv_sec)*1000000+(tv_end.tv_usec-tv_start.tv_usec);
 				if (total_time>1000){
+					total_time_ms = total_time/1000;
 					done_num = sender.done_num;
 					fail_num = sender.fail_num;
-					fprintf(stderr,"QPS:%d 已处理:%d 平均时间:%dus 失败超时占比%d%%\n",done_num*1000/(total_time/1000),done_num,total_time/done_num,fail_num*100/done_num);
+					total_deal_time = sender.total_time_ms;
+					fprintf(stderr,"QPS:%f 已处理:%d 平均时间:%dms 每个请求平均处理时间:%dms 失败超时占比%d%%\n",
+							done_num*1000.0/total_time_ms,
+							done_num,
+							total_time/1000/done_num,
+							total_deal_time/done_num,
+							fail_num*100/done_num);
 				}
 			}
 		}

@@ -33,6 +33,7 @@ public:
 	/*输出成员变量*/
 	unsigned int done_num;	//已处理的请求数
 	unsigned int fail_num;	//失败的请求数
+	unsigned int total_time_ms; //请求的处理时间总和
 };
 
 
