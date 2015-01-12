@@ -28,8 +28,8 @@ int main(int argc, char* argv[])
 
 	close(STDIN_FILENO);
 	signal(SIGPIPE, SIG_IGN);
-	signal(SIGTERM, &sigterm_handler);
-	signal(SIGINT, &sigint_handler);
+	//signal(SIGTERM, &sigterm_handler);
+	//signal(SIGINT, &sigint_handler);
 
 
 
